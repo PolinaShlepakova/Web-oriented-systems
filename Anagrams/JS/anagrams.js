@@ -24,21 +24,11 @@ function find_anagrams(arr) {
     }
 }
 
-/*function readSingleFile(evt) {
-    var f = evt.target.files[0];
-    if (f) {
-        var r = new FileReader();
-        r.onload = function (e) {
-            var contents = e.target.result;
-            var ct = r.result;
-            var words = ct.split(' ');
-            //alert(words[0]);
-        }
-        r.readAsText(f);
-    } else {
-        //alert("Failed to load file");
-    }
-}*/
+function parse_file(filename) {
+    var fs = require('fs');
+    return fs.readFileSync(filename).toString().split("\r\n");
+}
 
-var words = ["tovar", "aroza", "dfd", "avtor", "azora", "tavro"];
-find_anagrams(words);
+// var words = ["tovar", "aroza", "dfd", "avtor", "azora", "tavro"];
+//find_anagrams(words);
+find_anagrams(parse_file('words.txt'));
