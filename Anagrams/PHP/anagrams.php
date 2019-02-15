@@ -6,36 +6,32 @@ function sort_string($str) {
     return implode('', $stringParts);
 }
 
-function map_anagrams($sorted, $arr) {
-    return (array($sorted => $arr));
-}
-
 function find_anagrams($arr) {
     $map = [];
     for ($i = 0; $i < count($arr); $i++) {
         $sorted = sort_string($arr[$i]);
-//        if (map[sorted] == null) {
-//            // not in map
-//            map[sorted] = [arr[i]];
-//        } else {
-//            map[sorted].push(arr[i]);
-//        }
+        if (!empty($sorted) && !empty($map[$sorted])) {
+            // not in map
+            $map[$sorted] = [$arr[$i]];
+        } else {
+            ($map[$sorted])[] = ($arr[$i]);
+        }
     }
-//    for (var key in map) {
-//        if (map[key].length > 1) {
-//            var res = "";
-//            for (var i = 0; i < map[key].length; i++) {
-//                res += map[key][i] + (i === map[key].length - 1 ? "" : " - ");
-//            }
-//            console.log(res);
-//        }
-//    }
+    foreach ($map as $k => $v) {
+        if (count($v) > 1) {
+            $res = '';
+            for ($i = 0; $i < count($v); $i++) {
+                $res .= ($v[$i]) . ($i == count($v) - 1 ? '' : ' - ');
+            }
+            return implode('', $res);
+        }
+    }
 }
 
 //print sort_string('hello');
 
 $words = array('tovar', 'aroza', 'dfd', 'avtor', 'azora', 'tavro');
-print find_anagrams(words);
+print find_anagrams($words);
 
 
 
